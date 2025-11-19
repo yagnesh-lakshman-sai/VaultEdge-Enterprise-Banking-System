@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: smart-bank
+
+  # Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/smart_bank
+    username: root
+    password: Y@gne&h_2911 
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # JPA/Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update  
+    show-sql: true      
+    properties:
+      hibernate:
+        format_sql: true  
+        dialect: org.hibernate.dialect.MySQLDialect
+
+server:
+  port: 8080
+
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
