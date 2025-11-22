@@ -1,33 +1,53 @@
 package com.bank.smartbank.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.annotation.Role;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@Table(name ="users")
 public class User {
 
-	private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
+	@Column(nullable = false, unique =true , length = 100)
 	private String email;
 	
+	@Column(nullable = false)
 	private String password;
 	
+	@Column(name = "full_name" , nullable = false , length = 150)
 	private String fullName;
 	
-	private String  phine;
+	@Column(nullable = false , length = 15)
+	private String  phone;
 	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Role role = Role.CUSTOMER;
 	
-	private LocalDateTime createAt;
+	@Column(name = "created_at" , nullable = false , updatable = false)
+	private LocalDateTime createdAt;
 	
-	private Boolean isVerified;
+	@Column(name = "is_verified")
+	private Boolean isVerified =  false;
 	
-	private List<Account> accounts;
+	@OneToMany(mappedBy ="user" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Account> accounts = new ArrayList<>();
 	
 	public User() {
-	
-		this createdAt = localDateTime.now();
+		this.createdAt = LocalDateTime.now();
 	}
+}
+	
+	
 	
 	
