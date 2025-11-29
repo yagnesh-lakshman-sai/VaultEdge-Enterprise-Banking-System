@@ -4,11 +4,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class RegisterRequest {
 
 	@NotBlank(message ="Email is required")
@@ -28,15 +28,5 @@ public class RegisterRequest {
 	@NotBlank(message = "Phone number is required")
 	@Pattern(regexp ="^[0-9]{10}$", message = "Phone must be 10 digits")
 	private String phone;
-	
-	public RegisterRequest() {
-	}
-
-	public RegisterRequest(String email, String password, String fullName, String phone) {
-		this.email = email;
-		this.password = password;
-		this.fullName = fullName;
-		this.phone = phone;
-	}
-		
+			
 }
