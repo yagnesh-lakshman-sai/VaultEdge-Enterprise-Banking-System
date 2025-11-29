@@ -1,10 +1,10 @@
 package com.bank.smartbank.dto.auth;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginResponse {
 
 	private String token;
@@ -14,14 +14,4 @@ public class LoginResponse {
 	private String fullName;
 	private  String role;
 	
-	public LoginResponse() {
-    }
-    
-    public LoginResponse(String token, Long userId, String email, String fullName, String role) {
-        this.token = token;
-        this.userId = userId;
-        this.email = email;
-        this.fullName = fullName;
-        this.role = role;
-    }
 }
