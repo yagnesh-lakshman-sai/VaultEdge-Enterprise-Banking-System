@@ -8,6 +8,7 @@ import com.bank.smartbank.entity.Loan;
 import lombok.*;
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class LoanResponse {
 
 	private Long id;
