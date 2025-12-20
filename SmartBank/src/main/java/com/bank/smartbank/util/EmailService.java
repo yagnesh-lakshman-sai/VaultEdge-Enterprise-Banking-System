@@ -9,18 +9,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailService {
 
-	private final AccountNumberGenerator accountNumberGenerator;
-
 	private final JavaMailSender mailSender;
 
 	@Value("${spring.mail.username:noreply@smartbank.com}")
 	private String fromEmail;
 
-	public EmailService(JavaMailSender mailSender, AccountNumberGenerator accountNumberGenerator) {
+	public EmailService(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
-		this.accountNumberGenerator = accountNumberGenerator;
-	}
 
+	}
 	// Send simple text email
 
 	@Async
