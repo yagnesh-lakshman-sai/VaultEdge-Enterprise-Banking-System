@@ -2,6 +2,7 @@ package com.bank.smartbank.exception;
 
 import java.math.BigDecimal;
 
+@SuppressWarnings("serial")
 public class InsufficientBalanceException extends ApplicationException {
 
 	public InsufficientBalanceException(String message) {

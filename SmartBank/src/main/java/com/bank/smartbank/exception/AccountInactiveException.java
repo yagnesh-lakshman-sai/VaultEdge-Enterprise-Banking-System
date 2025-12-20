@@ -1,5 +1,6 @@
 package com.bank.smartbank.exception;
 
+@SuppressWarnings("serial")
 public class AccountInactiveException extends ApplicationException {
 
 	public AccountInactiveException(String accountNumber) {

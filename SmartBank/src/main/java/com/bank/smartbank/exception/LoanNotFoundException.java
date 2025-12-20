@@ -1,5 +1,6 @@
 package com.bank.smartbank.exception;
 
+@SuppressWarnings("serial")
 public class LoanNotFoundException extends ResourceNotFoundException {
     
     public LoanNotFoundException(String message) {

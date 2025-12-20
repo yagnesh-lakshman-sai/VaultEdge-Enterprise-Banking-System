@@ -1,5 +1,6 @@
 package com.bank.smartbank.exception;
 
+@SuppressWarnings("serial")
 public class UnauthorizedAccessException extends ApplicationException  {
 
 	public UnauthorizedAccessException() {
