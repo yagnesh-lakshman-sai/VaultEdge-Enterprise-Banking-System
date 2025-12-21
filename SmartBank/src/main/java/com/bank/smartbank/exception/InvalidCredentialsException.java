@@ -4,7 +4,7 @@ package com.bank.smartbank.exception;
 public class InvalidCredentialsException extends ApplicationException {
 
 	public InvalidCredentialsException() {
-		super("Invsclid email or password");
+		super("Invalid email or password");
 	}
 	
 	public InvalidCredentialsException(String message) {
