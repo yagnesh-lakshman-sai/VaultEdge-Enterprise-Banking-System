@@ -8,10 +8,10 @@ import lombok.*;
 public class LoginResponse {
 
 	private String token;
-	private String tokenType= "Bearer";
+	private String tokenType = "Bearer";
 	private Long userId;
 	private String email;
 	private String fullName;
-	private  String role;
-	
+	private String role;
+
 }

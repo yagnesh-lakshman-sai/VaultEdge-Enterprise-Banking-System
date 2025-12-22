@@ -13,9 +13,9 @@ public class OtpRequest {
 	@NotBlank(message = "Email is required")
 	@Email(message = "Invalid email format")
 	private String email;
-	
+
 	@NotBlank(message = "OTP is required")
 	@Pattern(regexp = "^[0-9]{6}$", message = "OTP must be 6 digits")
 	private String otp;
-	
+
 }
