@@ -12,8 +12,8 @@ public class LoanApprovalRequest {
 
 	@NotNull(message = "Approval decision is required")
 	private Boolean approved;
-	
+
 	@Size(max = 500, message = "Remarks cannot exceed 500 characters")
 	private String remarks;
-	
+
 }

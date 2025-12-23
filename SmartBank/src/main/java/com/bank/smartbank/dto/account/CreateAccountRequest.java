@@ -11,7 +11,7 @@ import lombok.*;
 public class CreateAccountRequest {
 
 	@NotBlank(message = "Account type is required")
-	@Pattern(regexp ="SAVINGS|CURRENT|FIXED_DEPOSIT", message = "Invalid account type")
+	@Pattern(regexp = "SAVINGS|CURRENT|FIXED_DEPOSIT", message = "Invalid account type")
 	private String type;
-	
+
 }

@@ -16,16 +16,15 @@ public class TransferResponse {
 	private BigDecimal newBalance;
 	private LocalDateTime timestamp;
 	private String message;
-	
-    public TransferResponse(String transactionRef, String fromAccountNumber, 
-                           String toAccountNumber, BigDecimal amount, 
-                           BigDecimal newBalance, String message) {
-    	this.timestamp = LocalDateTime.now();
-        this.transactionRef = transactionRef;
-        this.fromAccountNumber = fromAccountNumber;
-        this.toAccountNumber = toAccountNumber;
-        this.amount = amount;
-        this.newBalance = newBalance;
-        this.message = message;
-    }
+
+	public TransferResponse(String transactionRef, String fromAccountNumber, String toAccountNumber, BigDecimal amount,
+			BigDecimal newBalance, String message) {
+		this.timestamp = LocalDateTime.now();
+		this.transactionRef = transactionRef;
+		this.fromAccountNumber = fromAccountNumber;
+		this.toAccountNumber = toAccountNumber;
+		this.amount = amount;
+		this.newBalance = newBalance;
+		this.message = message;
+	}
 }

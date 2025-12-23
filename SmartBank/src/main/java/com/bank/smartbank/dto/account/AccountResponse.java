@@ -17,13 +17,13 @@ public class AccountResponse {
 	private String type;
 	private String status;
 	private LocalDateTime createdAt;
-	 
-    public AccountResponse(Account account) {
-        this.id = account.getId();
-        this.accountNumber = account.getAccountNumber();
-        this.balance = account.getBalance();
-        this.type = account.getType().name();
-        this.status = account.getStatus().name();
-        this.createdAt = account.getCreatedAt();
-    }
+
+	public AccountResponse(Account account) {
+		this.id = account.getId();
+		this.accountNumber = account.getAccountNumber();
+		this.balance = account.getBalance();
+		this.type = account.getType().name();
+		this.status = account.getStatus().name();
+		this.createdAt = account.getCreatedAt();
+	}
 }
