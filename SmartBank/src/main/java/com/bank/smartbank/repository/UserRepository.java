@@ -13,13 +13,11 @@ import com.bank.smartbank.entity.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
 	Optional<User> findByEmail(String email);
-	
-	boolean existsByEmail(String email);
-	
-	List<User> findByIsVerifiedTrue();
-	
-	List<User> findByRole(Role role);
-	
-	
-}
 
+	boolean existsByEmail(String email);
+
+	List<User> findByIsVerifiedTrue();
+
+	List<User> findByRole(Role role);
+
+}

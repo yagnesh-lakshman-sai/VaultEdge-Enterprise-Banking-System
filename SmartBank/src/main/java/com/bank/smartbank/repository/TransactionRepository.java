@@ -15,28 +15,23 @@ import com.bank.smartbank.entity.TransactionType;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
 	Optional<Transaction> findByTransactionRef(String transactionRef);
-	
+
 	List<Transaction> findByAccountOrderByCreatedAtDesc(Account account);
-	
+
 	List<Transaction> findByAccountIdOrderByCreatedAtDesc(Long accountId);
-	
-	List<Transaction> finByAccountAndType(Account account, TransactionType type);
-	
-	@Query("SELECT t FROM Transaction t WHERE t.account.id = :accountId " +
-	           "AND t.createdAt BETWEEN :startDate AND :endDate " +
-	           "ORDER BY t.createdAt ASC")
-	    List<Transaction> findByAccountAndDateRange(
-	        @Param("accountId") Long accountId,
-	        @Param("startDate") LocalDateTime startDate,
-	        @Param("endDate") LocalDateTime endDate
-	    );
-	
-	@Query("SELECT t FROM Transaction t WHERE t.account.id = :accountId " +
-	           "ORDER BY t.createdAt DESC")
-	    List<Transaction> findRecentTransactions(@Param("accountId") Long accountId);
-	
+
+	List<Transaction> findByAccountAndType(Account account, TransactionType type);
+
+	@Query("SELECT t FROM Transaction t WHERE t.account.id = :accountId "
+			+ "AND t.createdAt BETWEEN :startDate AND :endDate " + "ORDER BY t.createdAt ASC")
+	List<Transaction> findByAccountAndDateRange(@Param("accountId") Long accountId,
+			@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+	@Query("SELECT t FROM Transaction t WHERE t.account.id = :accountId " + "ORDER BY t.createdAt DESC")
+	List<Transaction> findRecentTransactions(@Param("accountId") Long accountId);
+
 	Long countByAccountAndType(Account account, TransactionType type);
-	
+
 	boolean existsByTransactionRef(String transactionRef);
-	    
+
 }
