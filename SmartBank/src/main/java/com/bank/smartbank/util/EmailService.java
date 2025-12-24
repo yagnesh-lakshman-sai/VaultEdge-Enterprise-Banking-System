@@ -18,7 +18,6 @@ public class EmailService {
 		this.mailSender = mailSender;
 
 	}
-	// Send simple text email
 
 	@Async
 	public void sendEmail(String to, String subject, String text) {
@@ -37,16 +36,12 @@ public class EmailService {
 		}
 	}
 
-	// Send OTP email
-
 	@Async
 	public void sendOtpEmail(String to, String otp) {
 		String subject = Constants.EMAIL_SUBJECT_OTP;
 		String text = buildOtpEmailBody(otp);
 		sendEmail(to, subject, text);
 	}
-
-	// Send welcome email after registration
 
 	@Async
 	public void sendWelcomeEmail(String to, String name) {
@@ -55,8 +50,6 @@ public class EmailService {
 		sendEmail(to, subject, text);
 	}
 
-	// Send transfer confirmation email
-
 	@Async
 	public void sendTransferConfirmationEmail(String to, String transactionRef, String amount) {
 		String subject = Constants.EMAIL_SUBJECT_TRANSFER;
@@ -64,16 +57,12 @@ public class EmailService {
 		sendEmail(to, subject, text);
 	}
 
-	// Send loan approval notification
-
 	@Async
 	public void sendLoanApprovalEmail(String to, String loanNumber, String amount) {
 		String subject = Constants.EMAIL_SUBJECT_LOAN_APPROVED;
 		String text = buildLoanApprovalEmailBody(loanNumber, amount);
 		sendEmail(to, subject, text);
 	}
-
-	// Email Body Templates
 
 	private String buildOtpEmailBody(String otp) {
 		return String.format("""
