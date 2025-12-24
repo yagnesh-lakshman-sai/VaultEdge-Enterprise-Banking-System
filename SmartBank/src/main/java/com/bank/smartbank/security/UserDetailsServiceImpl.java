@@ -18,34 +18,27 @@ import com.bank.smartbank.repository.UserRepository;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	private final UserRepository userRepository;
-	
+
 	public UserDetailsServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-	  User user = userRepository.findByEmail(email)
-	                 .orElseThrow(() -> new UserNotFoundException("email", email));
-		
-		return new org.springframework.security.core.userdetails.User(
-				user.getEmail(),
-				user.getPassword(),
-				getAuthorities(user));		
-	}
-	
-	public UserDetails loadUserById(Long userId) {
-		User user = userRepository.findById(userId)
-				   .orElseThrow(() -> new UserNotFoundException(userId));
-		
-		return new org.springframework.security.core.userdetails.User(
-				user.getEmail(),
-				user.getPassword(),
+		User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("email", email));
+
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
 				getAuthorities(user));
 	}
-	
-	private Collection<? extends GrantedAuthority> getAuthorities(User user){
-		return Collections.singletonList(
-				new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+
+	public UserDetails loadUserById(Long userId) {
+		User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+
+		return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+				getAuthorities(user));
+	}
+
+	private Collection<? extends GrantedAuthority> getAuthorities(User user) {
+		return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
 	}
 }
