@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class AuthService {
 
+	private static final Logger logger = LoggerFactory.getLogger(AuthService.class); 
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 	private final JwtTokenProvider jwtTokenProvider;
@@ -45,7 +48,6 @@ public class AuthService {
 		this.emailService = emailService;
 	}
 
-//	Register new user logic
 
 	public void register(RegisterRequest request) {
 		if (userRepository.existsByEmail(request.getEmail())) {
@@ -66,11 +68,10 @@ public class AuthService {
 		storeOtp(request.getEmail(), otp);
 		emailService.sendOtpEmail(request.getEmail(), otp);
 
-		System.out.println("User registered: " + request.getEmail());
-		System.out.println("OTP sent: " + otp);
+		logger.info("User registered: {}",  request.getEmail());
+		logger.debug("OTP sent: {}",  otp);
 	}
 
-//	Verify OTP logic
 
 	public void verifyOtp(OtpRequest request) {
 		OtpData otpData = otpStore.get(request.getEmail());
@@ -98,10 +99,9 @@ public class AuthService {
 
 		emailService.sendWelcomeEmail(user.getEmail(), user.getFullName());
 
-		System.out.println("User verified: " + request.getEmail());
+		logger.info("User verified: {}",  request.getEmail());
 	}
 
-//	Login user
 
 	public LoginResponse login(LoginRequest request) {
 		User user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new InvalidCredentialsException());
@@ -119,12 +119,11 @@ public class AuthService {
 		response.setFullName(user.getFullName());
 		response.setRole(user.getRole().name());
 
-		System.out.println("User logged in: " + user.getEmail());
+		logger.info("User logged in: {}",  user.getEmail());
 
 		return response;
 	}
 
-//	Resend OTP logic 
 
 	public void resendOtp(String email) {
 		User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("email", email));
@@ -139,16 +138,12 @@ public class AuthService {
 		System.out.println("OTP resent to: " + email + " - " + otp);
 	}
 
-//------	HELPER METHODS ------- 
-
-//	Store OTP with expiration time
 
 	private void storeOtp(String email, String otp) {
 		LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(5);
 		otpStore.put(email, new OtpData(otp, expiryTime));
 	}
 
-//	 Inner class to store OTP data
 
 	private static class OtpData {
 		private final String otp;
