@@ -168,46 +168,30 @@ public class LoanService {
 
 	private BigDecimal calculateEMI(BigDecimal principal, BigDecimal annualRate, int tenureMonths) {
 
-		// Special case: 0% interest (promotional loans)
 		if (annualRate.compareTo(BigDecimal.ZERO) == 0) {
 			return principal.divide(new BigDecimal(tenureMonths), 2, RoundingMode.HALF_UP);
 		}
 
-		// Convert annual rate to monthly rate
-		// Example: 12% annual → 12/12/100 = 0.01 (1% monthly)
 		BigDecimal monthlyRate = annualRate.divide(new BigDecimal("12"), 10, RoundingMode.HALF_UP)
 				.divide(new BigDecimal("100"), 10, RoundingMode.HALF_UP);
 
-		// Calculate (1 + R)
 		BigDecimal onePlusR = BigDecimal.ONE.add(monthlyRate);
 
-		// Calculate (1 + R)^N
 		BigDecimal power = onePlusR.pow(tenureMonths);
 
-		// Calculate numerator: P × R × (1+R)^N
 		BigDecimal numerator = principal.multiply(monthlyRate).multiply(power);
 
-		// Calculate denominator: (1+R)^N - 1
 		BigDecimal denominator = power.subtract(BigDecimal.ONE);
 
-		// Calculate EMI: numerator / denominator
 		BigDecimal emi = numerator.divide(denominator, 2, RoundingMode.HALF_UP);
 
 		return emi;
 	}
-	
+
 	public boolean isLoanOwnedByUser(Long loanId, Long userId) {
-	    Loan loan = loanRepository.findById(loanId)
-	            .orElseThrow(() -> new LoanNotFoundException(loanId));
-	    
-	    return loan.getUser().getId().equals(userId);
+		Loan loan = loanRepository.findById(loanId).orElseThrow(() -> new LoanNotFoundException(loanId));
+
+		return loan.getUser().getId().equals(userId);
 	}
 
-//	private BigDecimal calculateTotalPayable(BigDecimal emi, int tenureMonths) {
-//		return emi.multiply(new BigDecimal(tenureMonths));
-//	}
-//
-//	private BigDecimal calculateTotalInterest(BigDecimal totalPayable, BigDecimal principal) {
-//		return totalPayable.subtract(principal);
-//	}
 }
