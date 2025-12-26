@@ -1,6 +1,6 @@
 spring:
   application:
-    name: smart-bank
+    name: smartbank-management-system
 
   # Database Configuration
   datasource:
@@ -35,8 +35,13 @@ spring:
 server:
   port: 8080
 
-
 logging:
-  level:
-     org.hibernate.SQL: DEBUG
-     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+   level:
+     root: INFO
+     com.bank.smartbank: DEBUG  # Your package logs at DEBUG level
+     org.springframework.security: DEBUG  # Security logs
+     org.hibernate.SQL: DEBUG  # SQL queries
+   pattern:
+     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+   file:
+      name: logs/smart-bank.log
