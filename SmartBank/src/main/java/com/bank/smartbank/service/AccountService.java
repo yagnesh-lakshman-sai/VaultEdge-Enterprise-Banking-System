@@ -36,8 +36,6 @@ public class AccountService {
 		this.accountNumberGenerator = accountNumberGenerator;
 	}
 
-//	Create new account for user
-
 	public AccountResponse createAccount(Long userId, CreateAccountRequest request) {
 		User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
 
@@ -57,8 +55,6 @@ public class AccountService {
 		return new AccountResponse(savedAccount);
 	}
 
-//	Get all accounts for a user
-
 	public List<AccountResponse> getUserAccounts(Long userId) {
 		if (!userRepository.existsById(userId)) {
 			throw new UserNotFoundException(userId);
@@ -69,8 +65,6 @@ public class AccountService {
 		return accounts.stream().map(AccountResponse::new).collect(Collectors.toList());
 	}
 
-//	Get account by account number
-
 	public AccountResponse getAccountNumber(String accountNumber) {
 		Account account = accountRepository.findByAccountNumber(accountNumber)
 				.orElseThrow(() -> new AccountNotFoundException("accountNumber", accountNumber));
@@ -78,14 +72,10 @@ public class AccountService {
 		return new AccountResponse(account);
 	}
 
-//	 Get account entity (for internal use by other services)
-
 	public Account getAccountEntity(String accountNumber) {
 		return accountRepository.findByAccountNumber(accountNumber)
 				.orElseThrow(() -> new AccountNotFoundException("accountNumber", accountNumber));
 	}
-
-//	Check if user owns the account
 
 	public boolean isAccountOwnedByUser(String accountNumber, long userId) {
 		Account account = accountRepository.findByAccountNumber(accountNumber)
@@ -94,23 +84,15 @@ public class AccountService {
 		return account.getUser().getId().equals(userId);
 	}
 
-//	Get account balance
-
 	public BigDecimal getAccountBalance(String accountNumber) {
 		Account account = getAccountEntity(accountNumber);
 		return account.getBalance();
 	}
 
-//	Update account balance (internal method)
-
 	protected void updateBalance(Account account, BigDecimal newBalance) {
 		account.setBalance(newBalance);
 		accountRepository.save(account);
 	}
-
-//	------------------HELPER METHODS-----------------
-
-//	Generate unique account number
 
 	private String generateUniqueAccountNumber() {
 		String accountNumber;
