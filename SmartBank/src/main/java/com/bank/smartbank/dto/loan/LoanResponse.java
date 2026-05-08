@@ -14,6 +14,7 @@ public class LoanResponse {
 
 	private Long id;
 	private String loanNumber;
+	private String customerName;
 	private BigDecimal interestRate;
 	private BigDecimal amount;
 	private Integer tenureMonths;
@@ -28,6 +29,7 @@ public class LoanResponse {
 	public LoanResponse(Loan loan) {
 		this.id = loan.getId();
 		this.loanNumber = loan.getLoanNumber();
+		this.customerName = loan.getUser() != null ? loan.getUser().getFullName() : "Unknown";
 		this.amount = loan.getAmount();
 		this.interestRate = loan.getInterestRate();
 		this.tenureMonths = loan.getTenureMonths();
