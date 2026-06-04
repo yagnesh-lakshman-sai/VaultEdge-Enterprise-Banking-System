@@ -4,7 +4,7 @@ spring:
   
   # Production Database
   datasource:
-    url: ${DB_URL:jdbc:mysql://production-server:3306/smart_bank_prod}
+    url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -18,7 +18,7 @@ spring:
   # JPA Production Settings
   jpa:
     hibernate:
-      ddl-auto: validate  # Never update/create in production!
+      ddl-auto: update  # Never update/create in production!
     show-sql: false  # Don't log SQL in production
     properties:
       hibernate:
@@ -52,7 +52,6 @@ logging:
   level:
     root: WARN
     com.bank.smartbank: INFO
-  file:
-    name: /var/log/smart-bank/application.log
-  pattern:
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  
+pattern:
+  file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
