@@ -1,4 +1,4 @@
-# VaultEdge — Enterprise Banking System
+# 🏦 VaultEdge — Enterprise Banking System
 
 ![Banner](./SmartBank/screenshots/banner.png)
 
@@ -118,7 +118,7 @@ Enterprise Banking REST API built using Spring Boot and React.js with JWT authen
 
 ---
 
-## Project Structure
+## 🏗️ Project Structure
 
 ```bash
 smart-bank/
@@ -257,14 +257,13 @@ mvn test
 
 ---
 
-## Live Deployment
+## Deployment
 
-| Layer        | URL                                                      |
-| ------------ | -------------------------------------------------------- |
-| Frontend     | https://vaultedge.vercel.app                             |
-| Backend API  | https://vaultedge-api.onrender.com                       |
-| Swagger Docs | https://vaultedge-api.onrender.com/swagger-ui/index.html |
-| Database     | MySQL                                                    |
+| Layer    | Platform                   |
+| -------- | -------------------------- |
+| Frontend | Vercel                     |
+| Backend  | Render / Railway / AWS EC2 |
+| Database | MySQL                      |
 
 ---
 
@@ -291,7 +290,7 @@ mvn test
 
 ---
 
-## Author
+## 👨‍💻 Author
 
 ### Yagnesh Lakshman Sai
 
