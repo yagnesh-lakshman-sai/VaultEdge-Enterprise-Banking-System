@@ -1,36 +1,35 @@
 spring:
   application:
     name: smart-bank
-  
-  # Production Database
+
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    
-    # Connection pool settings
+    driver-class-name: org.postgresql.Driver
+
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5
       connection-timeout: 30000
-  
-  # JPA Production Settings
+
   jpa:
     hibernate:
-      ddl-auto: update  # Never update/create in production!
-    show-sql: false  # Don't log SQL in production
+      ddl-auto: update
+
+    show-sql: false
+
     properties:
       hibernate:
         format_sql: false
-        dialect: org.hibernate.dialect.MySQLDialect
-  
-  # Mail Configuration
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
   mail:
     host: ${SMTP_HOST}
     port: ${SMTP_PORT}
     username: ${SMTP_USERNAME}
     password: ${SMTP_PASSWORD}
+
     properties:
       mail:
         smtp:
@@ -41,17 +40,14 @@ spring:
 server:
   port: ${PORT:8080}
 
-
-# JWT Configuration
 jwt:
-  secret: ${JWT_SECRET}  # Must be set as environment variable!
-  expiration: 86400000  # 24 hours
+  secret: ${JWT_SECRET}
+  expiration: 86400000
 
-# Logging
 logging:
   level:
     root: WARN
     com.bank.smartbank: INFO
-  
-pattern:
-  file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
