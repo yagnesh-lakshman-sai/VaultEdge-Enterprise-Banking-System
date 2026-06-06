@@ -34,11 +34,7 @@ Enterprise Banking REST API built using Spring Boot and React.js with JWT authen
 
 ## Live Deployment
 
-| Component    | URL         |
-| ------------ | ----------- |
-| Frontend     | Coming Soon |
-| Backend API  | Coming Soon |
-| Swagger Docs | Coming Soon |
+Frontend: https://vault-edge-ui.vercel.app
 
 ---
 
